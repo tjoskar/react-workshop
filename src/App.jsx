@@ -1,24 +1,25 @@
 import * as React from "react";
-import { Component } from 'react';
-import './App.css';
-import * as logo from './logo.svg';;
+import { TodoForm } from './todo-form';
+import { TodoList } from './todo-list';
 
-class App extends Component {
-    render() {
-        return (
-            <div className="App">
-                <div className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <h2>Welcome to React!</h2>
-                </div>
-                <p className="App-intro">
-                    To get started, edit
-                    <code>src/App.js</code>
-                    and save to reload.
-                </p>
-            </div>
-        );
-    }
+export class TodoApp extends React.Component {
+
+  state = { items: [] }
+
+  handleNewItem = newValue => {
+    this.setState(prevState => ({
+      items: prevState.items.concat(newValue)
+    }));
+  }
+
+  render() {
+    return (
+      <div>
+        <h3>TODO</h3>
+        <TodoList items={this.state.items} />
+        <TodoForm newItem={this.handleNewItem}></TodoForm>
+      </div>
+    );
+  }
+
 }
-
-export default App;
