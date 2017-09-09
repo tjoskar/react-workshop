@@ -8,16 +8,32 @@ export class TodoApp extends React.Component {
 
   handleNewItem = newValue => {
     this.setState(prevState => ({
-      items: prevState.items.concat(newValue)
+      items: prevState.items.concat({
+        value: newValue,
+        complete: false
+      })
     }));
+  }
+
+  onCompleteChange = item => complete => {
+    this.setState(({ items }) => {
+      const index = items.indexOf(item);
+      items[index] = Object.assign({}, item, { complete });
+      return { items };
+    });
+  }
+
+  getState = () => {
+    console.log(this.state);
   }
 
   render() {
     return (
       <div>
         <h3>TODO</h3>
-        <TodoList items={this.state.items} />
+        <TodoList items={this.state.items} onCompleteChange={this.onCompleteChange} />
         <TodoForm newItem={this.handleNewItem}></TodoForm>
+        <button onClick={this.getState}>Get state</button>
       </div>
     );
   }

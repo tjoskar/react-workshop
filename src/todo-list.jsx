@@ -1,9 +1,10 @@
 import * as React from 'react';
+import { TodoItem } from './todo-item';
 
-export const TodoList = ({ items }) => (
+export const TodoList = ({ items, onCompleteChange }) => (
   <ul>
     {items.map((item, i) => (
-      <li key={i}>{item}</li>
+      <TodoItem item={item} onCompleteChange={onCompleteChange(item)} key={i} />
     ))}
   </ul>
 );
