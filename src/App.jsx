@@ -19,7 +19,7 @@ export class TodoApp extends React.Component {
     this.setState(({ items }) => {
       const index = items.indexOf(item);
       items[index] = Object.assign({}, item, { complete });
-      return { items };
+      return { items: Array.from(items) };
     });
   }
 
