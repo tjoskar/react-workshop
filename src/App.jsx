@@ -23,7 +23,7 @@ export class TodoApp extends React.Component {
     });
   }
 
-  getState = () => {
+  printState = () => {
     console.log(this.state);
   }
 
@@ -33,7 +33,7 @@ export class TodoApp extends React.Component {
         <h3>TODO</h3>
         <TodoList items={this.state.items} onCompleteChange={this.onCompleteChange} />
         <TodoForm newItem={this.handleNewItem}></TodoForm>
-        <button onClick={this.getState}>Get state</button>
+        <button onClick={this.printState}>Print state</button>
       </div>
     );
   }
