@@ -16,6 +16,7 @@
     "outDir": "build/",
     "noEmitHelpers": true,
     "preserveConstEnums": true,
-    "suppressImplicitAnyIndexErrors": true
+    "suppressImplicitAnyIndexErrors": true,
+    "allowJs": true
   }
 }

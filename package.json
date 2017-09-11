@@ -16,6 +16,8 @@
     "reflect-metadata": "^0.1.8"
   },
   "devDependencies": {
+    "@types/react": "^16.0.5",
+    "@types/react-dom": "^15.5.4",
     "fuse-box": "^2.2.3",
     "tslib": "^1.7.1",
     "typescript": "^2.1.4",

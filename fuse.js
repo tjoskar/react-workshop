@@ -1,8 +1,5 @@
 const {
     FuseBox,
-    SVGPlugin,
-    CSSPlugin,
-    BabelPlugin,
     QuantumPlugin,
     WebIndexPlugin,
     Sparky
@@ -19,8 +16,6 @@ Sparky.task("config", () => {
         useTypescriptCompiler: true,
         experimentalFeatures: true,
         plugins: [
-            SVGPlugin(),
-            CSSPlugin(),
             WebIndexPlugin({
                 template: "src/index.html"
             }),
