@@ -1,0 +1,98 @@
+diff --git a/fuse.js b/fuse.js
+index f8b0d9b..7d1c288 100644
+--- a/fuse.js
++++ b/fuse.js
+@@ -26,10 +26,10 @@ Sparky.task("config", () => {
+         ]
+     });
+     // vendor
+-    vendor = fuse.bundle("vendor").instructions("~ index.jsx")
++    vendor = fuse.bundle("vendor").instructions("~ index.tsx")
+ 
+     // bundle app
+-    app = fuse.bundle("app").instructions("> [index.jsx]")
++    app = fuse.bundle("app").instructions("> [index.tsx]")
+ });
+ 
+ Sparky.task("default", ["clean", "config"], () => {
+diff --git a/src/app.jsx b/src/app.tsx
+similarity index 85%
+rename from src/app.jsx
+rename to src/app.tsx
+index 70ce089..310bcff 100644
+--- a/src/app.jsx
++++ b/src/app.tsx
+@@ -2,7 +2,14 @@ import * as React from 'react';
+ import { TodoForm } from './todo-form';
+ import { TodoList } from './todo-list';
+ 
+-export class TodoApp extends React.Component {
++export interface AppState {
++  items: {
++    value: string;
++    complete: boolean;
++  }[]
++}
++
++export class TodoApp extends React.Component<null, AppState> {
+ 
+   state = { items: [] }
+ 
+diff --git a/src/index.jsx b/src/index.tsx
+similarity index 100%
+rename from src/index.jsx
+rename to src/index.tsx
+diff --git a/src/test/__snapshots__/todo-form.test.jsx.snap b/src/test/__snapshots__/todo-form.test.tsx.snap
+similarity index 100%
+rename from src/test/__snapshots__/todo-form.test.jsx.snap
+rename to src/test/__snapshots__/todo-form.test.tsx.snap
+diff --git a/src/test/todo-form.test.jsx b/src/test/todo-form.test.tsx
+similarity index 90%
+rename from src/test/todo-form.test.jsx
+rename to src/test/todo-form.test.tsx
+index 472121d..aa02dab 100644
+--- a/src/test/todo-form.test.jsx
++++ b/src/test/todo-form.test.tsx
+@@ -6,7 +6,7 @@ import { TodoForm } from '../todo-form';
+ 
+ test('Render form', () => {
+   const tree = shallow(
+-    <TodoForm />
++    <TodoForm newItem={null} />
+   );
+ 
+   expect(toJson(tree)).toMatchSnapshot();
+@@ -16,7 +16,7 @@ test('Return the state value on save', () => {
+   // Arrange
+   const newItem = spy(() => null);
+   const tree = shallow(
+-    <TodoForm newItem={newItem} />
++    <TodoForm newItem={newItem as any} />
+   );
+   tree.setState({ text: 'Winter is coming' });
+   const submitEvent = {
+diff --git a/src/todo-form.jsx b/src/todo-form.tsx
+similarity index 79%
+rename from src/todo-form.jsx
+rename to src/todo-form.tsx
+index 3d0f238..e0072fa 100644
+--- a/src/todo-form.jsx
++++ b/src/todo-form.tsx
+@@ -1,6 +1,8 @@
+ import * as React from 'react';
+ 
+-export class TodoForm extends React.Component {
++export type TodoFormprops = { newItem: (string) => void };
++
++export class TodoForm extends React.Component<TodoFormprops> {
+     
+   state = { text: '' };
+ 
+diff --git a/src/todo-item.jsx b/src/todo-item.tsx
+similarity index 100%
+rename from src/todo-item.jsx
+rename to src/todo-item.tsx
+diff --git a/src/todo-list.jsx b/src/todo-list.tsx
+similarity index 100%
+rename from src/todo-list.jsx
+rename to src/todo-list.tsx
