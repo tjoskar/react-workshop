@@ -27,6 +27,8 @@ And create an interface for the state in `TodoApp` and a prop type for `TodoForm
 
 ```bash
 $ git apply typescript.patch
+$ git add .
+$ git commit
 ```
 
 #### Step 2:
