@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node fuse",
     "dist": "node fuse dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watch"
   },
   "author": "",
   "license": "ISC",
@@ -16,11 +16,30 @@
     "reflect-metadata": "^0.1.8"
   },
   "devDependencies": {
+    "@types/enzyme": "^2.8.7",
+    "@types/jest": "^20.0.8",
     "@types/react": "^16.0.5",
     "@types/react-dom": "^15.5.4",
+    "enzyme": "^2.9.1",
+    "enzyme-to-json": "^1.5.1",
     "fuse-box": "^2.2.3",
+    "jest": "^21.0.2",
+    "react-test-renderer": "^15.6.1",
+    "simple-spy": "^2.1.0",
     "tslib": "^1.7.1",
     "typescript": "^2.1.4",
     "uglify-js": "^3.0.15"
+  },
+  "jest": {
+    "testRegex": "src/.*(__tests__/.*|\\.(test|spec))\\.(ts|tsx|js|jsx)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx|js|jsx)$": "<rootDir>/preprocessor.js"
+    }
   }
 }
