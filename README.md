@@ -25,7 +25,7 @@ $ npm start
 
 Du borde nu se ett inputfällt, en knapp och lite text. Nice! 🙌
 
-Om du nu öppnar upp my-component.tsx i din editor kommer du se att det finns fyra komponenter. En som har hand om inputfältet, en som har hand om knappen, en som skriver ut en text och en fjärde komponent som knyter allt samman.
+Om du nu öppnar upp my-component.tsx i din editor kommer du se att det finns fyra komponenter. En som har hand om inputfältet, en som har hand om knappen, en som skriver ut en text och en fjärde komponent som knyter alltsamman.
 
 Dessvärre fungerar det inte att skriva något i inputfältet 😔
 
