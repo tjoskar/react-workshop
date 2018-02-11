@@ -1,10 +1,6 @@
 import * as React from 'react'
 
 export function SearchResults({ results, onClick }) {
-  if (!(Array.isArray(results) && results.length > 0)) {
-    return <h3>No Result</h3>
-  }
-
   return (
     <div>
       {results.map(result => (

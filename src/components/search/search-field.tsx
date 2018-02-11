@@ -7,12 +7,5 @@ type SearchFieldProps = {
 }
 
 export function SearchField(props: SearchFieldProps) {
-  return (
-    <input
-      className="form-control"
-      type="search"
-      value={props.value}
-      onChange={e => props.onChange(e.target.value)}
-    />
-  )
+  return <p>Stupid text</p>
 }
