@@ -1,48 +1,33 @@
-const {
-    FuseBox,
-    QuantumPlugin,
-    WebIndexPlugin,
-    Sparky
-} = require("fuse-box");
+const path = require('path')
+const { FuseBox, WebIndexPlugin } = require('fuse-box')
+const express = require('express')
+const fallback = require('express-history-api-fallback')
 
-let fuse, app, vendor, isProduction;
+const fuse = FuseBox.init({
+  homeDir: 'src',
+  target: 'browser@es2017',
+  output: 'dist/$name.js',
+  sourceMaps: true,
+  plugins: [
+    WebIndexPlugin({
+      template: 'index.html'
+    })
+  ]
+})
+fuse.dev(
+  {
+    port: 4444
+  },
+  server => {
+    const root = path.resolve('./dist')
+    server.httpServer.app.use(express.static(root))
+    server.httpServer.app.use(fallback('index.html', { root }))
+  }
+)
 
-Sparky.task("config", () => {
-    fuse = new FuseBox({
-        homeDir: "src/",
-        sourceMaps: !isProduction,
-        hash: isProduction,
-        output: "dist/$name.js",
-        useTypescriptCompiler: true,
-        experimentalFeatures: true,
-        plugins: [
-            WebIndexPlugin({
-                template: "src/index.html"
-            }),
-            isProduction && QuantumPlugin({
-                treeshake: true,
-                uglify: true
-            })
-        ]
-    });
-    // vendor
-    vendor = fuse.bundle("vendor").instructions("~ index.jsx")
-
-    // bundle app
-    app = fuse.bundle("app").instructions("> [index.jsx]")
-});
-
-Sparky.task("default", ["clean", "config"], () => {
-    fuse.dev();
-    // add dev instructions
-    app.watch().hmr()
-    return fuse.run();
-});
-
-Sparky.task("clean", () => Sparky.src("dist/").clean("dist/"));
-Sparky.task("prod-env", ["clean"], () => { isProduction = true })
-Sparky.task("dist", ["prod-env", "config"], () => {
-    // comment out to prevent dev server from running (left for the demo)
-    fuse.dev();
-    return fuse.run();
-});
+fuse
+  .bundle('app')
+  .instructions(' > boot.tsx')
+  .hmr()
+  .watch()
+fuse.run()
